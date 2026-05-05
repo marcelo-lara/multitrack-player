@@ -2,6 +2,7 @@ const fs = require('fs');
 const packageJson = fs.readFileSync('./package.json');
 const version = JSON.parse(packageJson).version || 0;
 const webpack = require('webpack');
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   configureWebpack: {
@@ -15,5 +16,5 @@ module.exports = {
   },
   lintOnSave: false,
   productionSourceMap: false,
-  publicPath: '/multitrack-player/'
+  publicPath: isProduction ? '/multitrack-player/' : '/'
 };
