@@ -28,7 +28,7 @@ const store = new Vuex.Store({
     playState: 'stopped',
     playPosition: 0,
     tracks: [],
-    clickActive: false,
+    clickActive: true,
     clickBpm: 102,
     soloTrack: null,
     dialog: null,

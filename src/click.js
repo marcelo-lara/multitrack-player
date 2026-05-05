@@ -39,18 +39,20 @@ export function clickEventLoop(store) {
 
   const clickInterval = getClickInterval(store.state);
   if (store.state.playPosition / eventLoopCount > clickInterval) {
-    const bufferSource = audioContext.createBufferSource();
-    bufferSource
-      .connect(gainNode)
-      .connect(stereoPannerNode)
-      .connect(audioContext.destination);
+    if (store.state.clickActive) {
+      const bufferSource = audioContext.createBufferSource();
+      bufferSource
+        .connect(gainNode)
+        .connect(stereoPannerNode)
+        .connect(audioContext.destination);
 
-    if (eventLoopCount % beats === 0) {
-      bufferSource.buffer = upAudioBuffer;
-      bufferSource.start();
-    } else {
-      bufferSource.buffer = audioBuffer;
-      bufferSource.start();
+      if (eventLoopCount % beats === 0) {
+        bufferSource.buffer = upAudioBuffer;
+        bufferSource.start();
+      } else {
+        bufferSource.buffer = audioBuffer;
+        bufferSource.start();
+      }
     }
 
     eventLoopCount++;
